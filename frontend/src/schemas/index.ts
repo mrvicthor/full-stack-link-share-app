@@ -21,3 +21,14 @@ export interface AuthResponse {
   accessToken: string;
   user: User;
 }
+
+const linkSchema = z.object({
+  platform: z.string({ message: "Please select a patform to display." }),
+  url: z.string({ message: "Can't be empty" }),
+});
+
+export const createSchema = z.object({
+  links: z.array(linkSchema),
+});
+
+export type CreateLinkSchema = z.infer<typeof createSchema>;

@@ -1,16 +1,19 @@
-import Loading from "@/components/ui/loading";
+import Loading from "@/components/loading";
 import useAuth from "@/hooks/useAuth";
 
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 const Home = (): JSX.Element => {
-  const { isLoading, user, error, isAuthenticated } = useAuth();
+  const { isLoading, error, isAuthenticated } = useAuth();
 
-  console.log({ isLoading, user, error });
-  if (isLoading) return <Loading />;
-
-  if (error || !isAuthenticated) return <Navigate to="/login" />;
-
-  return <div>Welcome, {user?.data.user.firstName}</div>;
+  return isLoading ? (
+    <Loading />
+  ) : error || !isAuthenticated ? (
+    <Navigate to="/login" />
+  ) : (
+    <section>
+      <Outlet />
+    </section>
+  );
 };
 
 export default Home;

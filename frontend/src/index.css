@@ -81,4 +81,8 @@
     border-color: #633cff;
     box-shadow: #efebff 0px 2px 16px 8px;
   }
+
+  .welcome-screen {
+    grid-template-columns: 35rem 1fr;
+  }
 }

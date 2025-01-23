@@ -92,3 +92,5 @@ export const login = async (data: LoginInput) => {
   }
   return response;
 };
+
+export const logout = () => API.post("/auth/logout");
