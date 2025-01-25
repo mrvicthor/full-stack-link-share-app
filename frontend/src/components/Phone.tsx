@@ -6,7 +6,7 @@ const Phone = () => {
       <img
         src={phoneLogo}
         alt="phone image"
-        className="w-[19.1875rem] h-[30rem]"
+        className="w-[19.1875rem] h-[32rem]"
       />
     </div>
   );
