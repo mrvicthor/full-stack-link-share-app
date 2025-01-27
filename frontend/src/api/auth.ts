@@ -95,7 +95,7 @@ export const login = async (data: LoginInput) => {
 
 export const logout = () => API.post("/auth/logout");
 
-export const createLink = async (data: LinkInput[]) => {
-  console.log(data);
+export const createLink = async (data: LinkInput[]) =>
   API.post("/create-link", data);
-};
+
+export const getLinks = async () => API.get("/links");
