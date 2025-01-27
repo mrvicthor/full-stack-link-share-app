@@ -1,5 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { handleCreateLink } from "../controller/link.controller";
+import {
+  handleCreateLink,
+  handleGetLinks,
+} from "../controller/link.controller";
 
 export default async function linkRoutes(server: FastifyInstance) {
   server.post(
@@ -7,4 +10,5 @@ export default async function linkRoutes(server: FastifyInstance) {
     { preHandler: [server.authenticate] },
     handleCreateLink
   );
+  server.get("/links", { preHandler: [server.authenticate] }, handleGetLinks);
 }
