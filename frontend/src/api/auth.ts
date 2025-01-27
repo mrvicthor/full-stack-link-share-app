@@ -1,4 +1,4 @@
-import { AuthResponse, LoginInput } from "@/schemas";
+import { AuthResponse, LinkInput, LoginInput } from "@/schemas";
 import axios, {
   AxiosError,
   AxiosResponse,
@@ -94,3 +94,8 @@ export const login = async (data: LoginInput) => {
 };
 
 export const logout = () => API.post("/auth/logout");
+
+export const createLink = async (data: LinkInput[]) => {
+  console.log(data);
+  API.post("/create-link", data);
+};

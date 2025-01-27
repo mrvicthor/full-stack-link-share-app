@@ -131,7 +131,7 @@ export const handleLogout = async (
 ) => {
   const session = request.cookies.accessToken as string;
   const payload = server.jwt.verify(session);
-  console.log({ payload });
+
   if (payload) {
     const { id } = payload as JWTPayload;
     await SessionModel.findByIdAndDelete(id);

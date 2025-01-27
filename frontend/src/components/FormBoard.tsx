@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { CreateLinkSchema, createSchema } from "@/schemas";
 import { Button } from "./ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
@@ -9,8 +10,10 @@ import { options } from "@/lib/constants";
 import Platform from "./Platform";
 import { Input } from "./ui/input";
 import Board from "./Board";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createLink } from "@/api/auth";
 const FormBoard = () => {
+  const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm<CreateLinkSchema>({
     resolver: zodResolver(createSchema),
@@ -27,8 +30,26 @@ const FormBoard = () => {
     control: form.control,
     name: "links",
   });
+  const { mutate: addLink, isPending } = useMutation({
+    mutationFn: createLink,
+    onSuccess: () => {
+      toast.success("Link successfully added...");
+      setIsOpen(false);
+      form.reset();
+    },
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["auth"] }),
+    onError: () => {
+      toast.error("Error creating link...");
+    },
+  });
+
+  const onSubmit = (data: CreateLinkSchema) => {
+    console.log(data.links);
+    addLink(data.links);
+  };
   return (
     <div>
+      <ToastContainer />
       <div className="pt-8 px-6">
         <h1 className="font-bold text-2xl">Customize your links</h1>
         <p className="text-[#737373] opacity-80 text-sm mt-4">
@@ -46,7 +67,10 @@ const FormBoard = () => {
         </Button>
       </div>
       <Form {...form}>
-        <form className="mt-6 relative h-[30rem]">
+        <form
+          className="mt-6 relative h-[30rem]"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
           {isOpen ? (
             <div className="space-y-2 overflow-y-scroll max-h-[26rem] overflow-hidden">
               {fields.map((item, index) => (
@@ -81,7 +105,7 @@ const FormBoard = () => {
                           defaultValue={field.value}
                         >
                           <FormControl>
-                            <SelectTrigger>
+                            <SelectTrigger className="hover:border-[#633cff] select-shadow ">
                               <SelectValue placeholder="GitHub" />
                             </SelectTrigger>
                           </FormControl>
@@ -109,11 +133,12 @@ const FormBoard = () => {
                         </FormLabel>
                         <FormControl className="">
                           <Input
+                            type="url"
                             className={`${
                               form.formState.errors.links &&
                               form.formState.errors.links[index]?.url &&
                               "border-red-500"
-                            }`}
+                            } hover:border-[#633cff] select-shadow `}
                             placeholder="🔗  https://github.com/benwright"
                             {...field}
                           />
@@ -135,8 +160,21 @@ const FormBoard = () => {
           )}
 
           <hr className="absolute bottom-[3.5rem] w-full" />
-          <Button className="absolute bottom-1 right-4 bg-[#633cff] hover:bg-[#beadff]">
-            Save
+          <Button
+            type="submit"
+            disabled={isPending}
+            className={`absolute ${
+              isOpen ? "bg-[#633cff]" : "bg-[#beadff]"
+            } bottom-1 right-4 hover:bg-[#beadff]`}
+          >
+            {isPending ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="animate-spin">⚪</span>
+                adding...
+              </span>
+            ) : (
+              "Save"
+            )}
           </Button>
         </form>
       </Form>

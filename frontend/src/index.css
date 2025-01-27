@@ -82,7 +82,18 @@
     box-shadow: #efebff 0px 2px 16px 8px;
   }
 
+  .select-shadow {
+    box-shadow: #efebff 0px 2px 16px 8px;
+    border: 1px solid #d9d9d9;
+  }
+
   .welcome-screen {
-    grid-template-columns: 35rem 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 64em) {
+    .welcome-screen {
+      grid-template-columns: 1fr 50.5em;
+    }
   }
 }

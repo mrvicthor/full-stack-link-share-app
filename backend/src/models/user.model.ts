@@ -3,7 +3,7 @@ import { comparePassword, hashPassword } from "../utils/hash";
 
 interface ILink {
   _id: Schema.Types.ObjectId;
-  title: string;
+  platform: string;
   url: string;
 }
 
@@ -59,7 +59,7 @@ const userSchema = new Schema<UserDocument>(
           ref: "Link",
           required: true,
         },
-        title: {
+        platform: {
           type: String,
           required: true,
         },

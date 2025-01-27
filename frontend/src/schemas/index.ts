@@ -27,6 +27,8 @@ const linkSchema = z.object({
   url: z.string({ message: "Can't be empty" }),
 });
 
+export type LinkInput = z.infer<typeof linkSchema>;
+
 export const createSchema = z.object({
   links: z.array(linkSchema),
 });
