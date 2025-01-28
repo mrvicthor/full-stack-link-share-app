@@ -3,6 +3,7 @@ import {
   handleCreateLink,
   handleDeleteLink,
   handleGetLinks,
+  handleUpdateLink,
 } from "../controller/link.controller";
 
 export default async function linkRoutes(server: FastifyInstance) {
@@ -13,4 +14,5 @@ export default async function linkRoutes(server: FastifyInstance) {
   );
   server.get("/links", { preHandler: [server.authenticate] }, handleGetLinks);
   server.delete("/links/:id", handleDeleteLink);
+  server.put("/links/:id", handleUpdateLink);
 }

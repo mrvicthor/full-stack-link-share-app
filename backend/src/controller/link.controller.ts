@@ -57,3 +57,28 @@ export const handleDeleteLink = async (
     return reply.code(404).send({ message: "Link not found" });
   }
 };
+
+export const handleUpdateLink = async (
+  request: FastifyRequest<{ Body: CreateLinkInput; Params: { id: string } }>,
+  reply: FastifyReply
+) => {
+  const { id } = request.params;
+  try {
+    const updatedLink = await LinkModel.findByIdAndUpdate(id, request.body, {
+      new: true,
+      runValidators: true,
+    });
+    await UserModel.updateOne(
+      { _id: request.user.id, "links._id": id },
+      {
+        $set: {
+          "links.$.title": updatedLink?.platform,
+          "links.$.url": updatedLink?.url,
+        },
+      }
+    );
+    return reply.code(200).send({ message: "Link successfully updated" });
+  } catch (error) {
+    return reply.code(404).send({ message: "Link not found" });
+  }
+};
