@@ -37,9 +37,12 @@ const FormBoard = () => {
       setIsOpen(false);
       form.reset();
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ["auth"] }),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
+      queryClient.invalidateQueries({ queryKey: ["links"] });
+    },
     onError: () => {
-      toast.error("Error creating link...");
+      toast.error("Error adding link...");
     },
   });
 

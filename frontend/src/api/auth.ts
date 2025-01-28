@@ -11,6 +11,15 @@ interface QueueItem {
   reject: (error?: unknown) => void;
 }
 
+type LinkData = {
+  platform: string;
+  url: string;
+};
+
+interface UpdateLink extends LinkData {
+  id: string;
+}
+
 const API: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
@@ -99,3 +108,10 @@ export const createLink = async (data: LinkInput[]) =>
   API.post("/create-link", data);
 
 export const getLinks = async () => API.get("/links");
+
+export const deleteLink = async (id: string) => API.delete(`/links/${id}`);
+
+export const updateLink = async (data: UpdateLink) => {
+  const { id, ...rest } = data;
+  API.put(`/links/${id}`, rest);
+};

@@ -7,7 +7,7 @@ const useLinks = (opts = {}) => {
   const queryClient = useQueryClient();
   const {
     error,
-    data: links,
+    data: user,
     ...rest
   } = useQuery({
     queryKey: [LINKS],
@@ -20,7 +20,7 @@ const useLinks = (opts = {}) => {
   if (error) {
     queryClient.setQueryData([LINKS], null);
   }
-  return { links, ...rest };
+  return { user, ...rest };
 };
 
 export default useLinks;

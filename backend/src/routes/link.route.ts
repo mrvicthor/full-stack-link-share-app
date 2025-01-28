@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import {
   handleCreateLink,
+  handleDeleteLink,
   handleGetLinks,
 } from "../controller/link.controller";
 
@@ -11,4 +12,5 @@ export default async function linkRoutes(server: FastifyInstance) {
     handleCreateLink
   );
   server.get("/links", { preHandler: [server.authenticate] }, handleGetLinks);
+  server.delete("/links/:id", handleDeleteLink);
 }
