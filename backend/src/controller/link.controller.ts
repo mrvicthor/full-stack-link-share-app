@@ -45,6 +45,7 @@ export const handleDeleteLink = async (
       _id: id,
       owner: request.user.id,
     });
+
     await UserModel.updateOne(
       { _id: request.user.id },
       {
@@ -68,11 +69,12 @@ export const handleUpdateLink = async (
       new: true,
       runValidators: true,
     });
+
     await UserModel.updateOne(
       { _id: request.user.id, "links._id": id },
       {
         $set: {
-          "links.$.title": updatedLink?.platform,
+          "links.$.platform": updatedLink?.platform,
           "links.$.url": updatedLink?.url,
         },
       }

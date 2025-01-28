@@ -38,7 +38,6 @@ const FormBoard = () => {
       form.reset();
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
       queryClient.invalidateQueries({ queryKey: ["links"] });
     },
     onError: () => {
@@ -46,10 +45,8 @@ const FormBoard = () => {
     },
   });
 
-  const onSubmit = (data: CreateLinkSchema) => {
-    console.log(data.links);
-    addLink(data.links);
-  };
+  const onSubmit = (data: CreateLinkSchema) => addLink(data.links);
+
   return (
     <div>
       <ToastContainer />

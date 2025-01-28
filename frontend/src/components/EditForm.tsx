@@ -48,7 +48,7 @@ const EditForm = ({ id, url, platform }: EditProps) => {
       toast.success("Link deleted successfully");
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
+      queryClient.invalidateQueries({ queryKey: ["links"] });
     },
   });
 
@@ -58,7 +58,7 @@ const EditForm = ({ id, url, platform }: EditProps) => {
       toast.success("Link updated successfully");
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
+      queryClient.invalidateQueries({ queryKey: ["links"] });
     },
   });
 
@@ -115,16 +115,30 @@ const EditForm = ({ id, url, platform }: EditProps) => {
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="destructive" onClick={() => deleteOne(id)}>
-              Delete
+              {isPending ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="animate-spin">⚪</span>
+                  deleting...
+                </span>
+              ) : (
+                "Delete"
+              )}
             </Button>
           </DialogClose>
           <DialogClose asChild>
             <Button
               type="submit"
               disabled={isPending || !form.formState.isDirty}
-              className="bg-[#633cff]"
+              className="bg-[#633cff] hover:bg-[#beadff]"
             >
-              Save changes
+              {isPending ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="animate-spin">⚪</span>
+                  editing...
+                </span>
+              ) : (
+                "Edit"
+              )}
             </Button>
           </DialogClose>
         </DialogFooter>

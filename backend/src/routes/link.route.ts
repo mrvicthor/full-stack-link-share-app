@@ -13,6 +13,14 @@ export default async function linkRoutes(server: FastifyInstance) {
     handleCreateLink
   );
   server.get("/links", { preHandler: [server.authenticate] }, handleGetLinks);
-  server.delete("/links/:id", handleDeleteLink);
-  server.put("/links/:id", handleUpdateLink);
+  server.delete(
+    "/links/:id",
+    { preHandler: [server.authenticate] },
+    handleDeleteLink
+  );
+  server.put(
+    "/links/:id",
+    { preHandler: [server.authenticate] },
+    handleUpdateLink
+  );
 }
