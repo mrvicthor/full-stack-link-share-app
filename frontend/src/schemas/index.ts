@@ -53,3 +53,9 @@ export const registerSchema = z
   });
 
 export type RegisterFormInput = z.infer<typeof registerSchema>;
+
+export const verifySchema = z.object({
+  verifyCode: z.string({ message: "Please check again" }),
+});
+
+export type VerifyInput = z.infer<typeof verifySchema>;

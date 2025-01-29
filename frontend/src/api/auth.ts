@@ -109,6 +109,8 @@ export const login = async (data: LoginInput) => {
   return response;
 };
 
+export const verifyEmail = async (data: string) =>
+  API.post("/auth/verify-email", data);
 export const logout = () => API.post("/auth/logout");
 
 export const createLink = async (data: LinkInput[]) =>

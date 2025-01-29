@@ -34,7 +34,7 @@ const Signup = () => {
     mutationFn: createUser,
     onSuccess: () => {
       toast.success("Please verify your account");
-      navigate("/login", { replace: true });
+      navigate("/verify-email", { replace: true });
     },
   });
   const onSubmit = (data: RegisterFormInput) => createAccount(data);

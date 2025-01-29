@@ -26,10 +26,8 @@ const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginInput) => {
-    console.log(form.formState);
-    loginUser(data);
-  };
+  const onSubmit = (data: LoginInput) => loginUser(data);
+
   const {
     isPending,
     isError,

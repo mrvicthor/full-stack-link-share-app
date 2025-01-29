@@ -7,12 +7,14 @@ import Layout from "./components/Layout";
 import WelcomeScreen from "./pages/WelcomeScreen";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginForm />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
 
       <Route path="/" element={<Home />}>
         <Route
