@@ -6,11 +6,13 @@ import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import WelcomeScreen from "./pages/WelcomeScreen";
 import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginForm />} />
+      <Route path="/signup" element={<Signup />} />
 
       <Route path="/" element={<Home />}>
         <Route

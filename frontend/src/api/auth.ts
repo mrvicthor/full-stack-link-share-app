@@ -1,4 +1,9 @@
-import { AuthResponse, LinkInput, LoginInput } from "@/schemas";
+import {
+  AuthResponse,
+  LinkInput,
+  LoginInput,
+  RegisterFormInput,
+} from "@/schemas";
 import axios, {
   AxiosError,
   AxiosResponse,
@@ -94,6 +99,8 @@ export const refreshToken = () => API.post("/auth/refresh");
 export const getUser = async () =>
   API.get<AuthResponse>("/auth/verify-session");
 
+export const createUser = async (data: RegisterFormInput) =>
+  API.post("/auth/register", data);
 export const login = async (data: LoginInput) => {
   const response = await API.post("/auth/login", data);
   if (response.data.accessToken) {

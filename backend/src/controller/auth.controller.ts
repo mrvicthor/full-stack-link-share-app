@@ -30,6 +30,7 @@ export const handleCreateUser = async (
   request: FastifyRequest<{ Body: CreateUserInput }>,
   reply: FastifyReply
 ) => {
+  console.log(request.body);
   const result = { ...request.body, userAgent: request.headers["user-agent"] };
 
   const existingUser = await findUserByEmail(result.email);

@@ -34,3 +34,22 @@ export const createSchema = z.object({
 });
 
 export type CreateLinkSchema = z.infer<typeof createSchema>;
+
+export const registerSchema = z
+  .object({
+    email: z
+      .string({ message: "Can't be empty" })
+      .email({ message: "Invalid email" }),
+    password: z
+      .string({ message: "Please check again" })
+      .min(8, { message: "Please check again" }),
+    confirmPassword: z
+      .string({ message: "Please check again" })
+      .min(8, { message: "Please check again" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
+
+export type RegisterFormInput = z.infer<typeof registerSchema>;

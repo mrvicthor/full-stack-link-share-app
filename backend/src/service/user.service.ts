@@ -11,10 +11,8 @@ export function generateVerificationCode(length = 6) {
   return crypto.randomInt(10 ** (length - 1), 10 ** length).toString();
 }
 export async function createUser(data: CreateUserInput) {
-  const { firstName, lastName, email, password, userAgent } = data;
+  const { email, password, userAgent } = data;
   const user = await UserModel.create({
-    firstName,
-    lastName,
     email,
     password,
   });
