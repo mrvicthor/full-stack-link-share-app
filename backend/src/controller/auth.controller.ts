@@ -24,7 +24,7 @@ interface JWTPayload {
   [key: string]: any;
 }
 
-const APP_ORIGIN = process.env.APP_ORIGIN as string;
+const DEVELOPMENT_ORIGIN = process.env.DEVELOPMENT_ORIGIN as string;
 const secure = process.env.NODE_ENV !== "development";
 export const handleCreateUser = async (
   request: FastifyRequest<{ Body: CreateUserInput }>,
@@ -182,7 +182,7 @@ export const handleForgotPassword = async (
     expiresAt,
   });
 
-  const url = `${APP_ORIGIN}/reset-password?code=${
+  const url = `${DEVELOPMENT_ORIGIN}/password/reset?code=${
     validCode._id
   }&exp=${expiresAt.getTime()}`;
 

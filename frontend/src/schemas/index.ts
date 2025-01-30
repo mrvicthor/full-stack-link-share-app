@@ -59,3 +59,28 @@ export const verifySchema = z.object({
 });
 
 export type VerifyInput = z.infer<typeof verifySchema>;
+
+export const forgotPasswordSchema = z.object({
+  email: z
+    .string({ message: "Can't be empty" })
+    .email({ message: "Invalid email" }),
+});
+
+export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+
+export const resetPasswordSchema = z
+  .object({
+    token: z.string(),
+    password: z
+      .string({ message: "Please check again" })
+      .min(8, { message: "Please check again" }),
+    confirmPassword: z
+      .string({ message: "Please check again" })
+      .min(8, { message: "Please check again" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
+
+export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;

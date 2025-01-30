@@ -2,7 +2,9 @@ import {
   AuthResponse,
   LinkInput,
   LoginInput,
+  ForgotPasswordInput,
   RegisterFormInput,
+  ResetPasswordInput,
 } from "@/schemas";
 import axios, {
   AxiosError,
@@ -112,6 +114,14 @@ export const login = async (data: LoginInput) => {
 export const verifyEmail = async (data: string) =>
   API.post("/auth/verify-email", data);
 export const logout = () => API.post("/auth/logout");
+
+export const forgotPassword = async (data: ForgotPasswordInput) =>
+  API.post("/auth/forgot-password", data);
+
+export const resetPassword = async (data: ResetPasswordInput) => {
+  const { token, ...rest } = data;
+  API.post(`/auth/reset-password/${token}`, rest);
+};
 
 export const createLink = async (data: LinkInput[]) =>
   API.post("/create-link", data);

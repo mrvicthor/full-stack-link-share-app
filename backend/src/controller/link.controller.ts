@@ -9,7 +9,6 @@ export const handleCreateLink = async (
   reply: FastifyReply
 ) => {
   const links = request.body;
-  console.log(links);
   const { updatedUser } = await createLink({
     links,
     owner: request.user.id,
