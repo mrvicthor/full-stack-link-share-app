@@ -15,7 +15,6 @@ type Link = {
 // [];
 
 export const createLink = async ({ links, owner }: Link) => {
-  console.log("data", links);
   const user = await UserModel.findById(owner);
   const newLinks = links.map((link) => ({
     ...link,

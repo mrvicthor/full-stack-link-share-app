@@ -25,7 +25,7 @@ const ImageInput = ({
           htmlFor="profile-picture"
           className="h-[8.0625rem] w-[8.0625rem] overflow-hidden group/item bg-[#efebff] text-[#633cff] hover:opacity-90 rounded-md flex flex-col gap-y-3 items-center justify-center cursor-pointer"
         >
-          {Object.keys(imageUrl).length !== 0 ? (
+          {imageUrl && Object.keys(imageUrl).length !== 0 ? (
             <div className="relative h-full ">
               <img
                 src={imageUrl}

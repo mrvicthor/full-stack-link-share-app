@@ -83,14 +83,11 @@ const Profile = () => {
           <p>Your changes have been successfully saved!</p>
         </div>
       )),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ["auth"] }),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["links"] }),
   });
 
-  const onSubmit = async (data: ProfileInputData) => {
-    // const { Email, ...rest } = data;
-    console.log(data);
-    updateProfile(data);
-  };
+  const onSubmit = async (data: ProfileInputData) => updateProfile(data);
+
   return (
     <section className="container md:px-6 grid welcome-screen gap-4">
       <Toaster position="bottom-center" reverseOrder={false} />

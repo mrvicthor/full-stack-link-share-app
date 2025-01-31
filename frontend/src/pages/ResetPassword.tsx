@@ -44,10 +44,8 @@ const ResetPassword = () => {
     },
   });
 
-  const onSubmit = (data: ResetPasswordInput) => {
-    console.log(data);
-    handleReset(data);
-  };
+  const onSubmit = (data: ResetPasswordInput) => handleReset(data);
+
   return (
     <section className="container mx-auto max-w-[29.75rem] px-4 w-[90%] mt-[8.875rem] ">
       <div className="text-center flex devlinks-logo md:justify-center mb-4">

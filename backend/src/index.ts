@@ -72,7 +72,6 @@ server.decorate(
       }
       await request.jwtVerify();
     } catch (error) {
-      console.log("oops! I am here");
       return reply
         .code(401)
         .send({ message: "Invalid or expired authentication token" });
