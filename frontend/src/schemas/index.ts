@@ -84,3 +84,12 @@ export const resetPasswordSchema = z
   });
 
 export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
+
+export const profileSchema = z.object({
+  "First Name": z.string().min(2, { message: "Can't be empty" }),
+  "Last Name": z.string().min(2, { message: "Can't be empty" }),
+  imageUrl: z.string(),
+  Email: z.string().email({ message: "Invalid email" }),
+});
+
+export type ProfileInput = z.infer<typeof profileSchema>;

@@ -5,6 +5,7 @@ import {
   ForgotPasswordInput,
   RegisterFormInput,
   ResetPasswordInput,
+  ProfileInput,
 } from "@/schemas";
 import axios, {
   AxiosError,
@@ -122,6 +123,9 @@ export const resetPassword = async (data: ResetPasswordInput) => {
   const { token, ...rest } = data;
   API.post(`/auth/reset-password/${token}`, rest);
 };
+
+export const createProfile = async (data: ProfileInput) =>
+  API.post("/auth/create-profile", data);
 
 export const createLink = async (data: LinkInput[]) =>
   API.post("/create-link", data);

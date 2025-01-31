@@ -73,8 +73,35 @@
     text-indent: 20px;
   }
 
+  .register-form-input-profile {
+    border-radius: 8px;
+    padding: 0.5rem;
+    width: 100%;
+    height: 3rem;
+    margin-top: 0.5rem;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .register-form-input-profile > input {
+    outline: none;
+    border: none;
+    flex: 1 1 200px;
+    width: 100%;
+    caret-color: #633cff;
+    background-color: transparent;
+  }
+
+  input::placeholder {
+    color: #d9d9d9;
+  }
+
   .input-wrapper {
     border: 1px solid #d9d9d9;
+  }
+
+  .flex-item-3 {
+    flex: 0 1 auto;
   }
 
   .input-wrapper:focus-within {
@@ -89,6 +116,10 @@
 
   .welcome-screen {
     grid-template-columns: 1fr;
+  }
+
+  .card-wrapper {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
   }
 
   @media (min-width: 64em) {

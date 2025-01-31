@@ -1,22 +1,17 @@
-import phoneLogo from "@/assets/images/illustration-phone-mockup.svg";
 import useLinks from "@/hooks/useLinks";
 import Loading from "./Loading";
-import LinkItem from "./LinkItem";
+import phoneLogo from "@/assets/images/illustration-phone-mockup.svg";
 import { motion } from "motion/react";
 import { containerVariants } from "@/helpers";
+import LinkItem from "./LinkItem";
+import { Link } from "./Phone";
 
-export type Link = {
-  _id: string;
-  platform: string;
-  url: string;
-};
-const Phone = () => {
+const Details = () => {
   const { user, isLoading } = useLinks();
 
   const { firstName, lastName, email, image, links } =
     user?.data.userToReturn || {};
   const fullName = `${firstName} ${lastName}`;
-
   return isLoading ? (
     <Loading />
   ) : (
@@ -60,15 +55,6 @@ const Phone = () => {
                 url={link.url}
               />
             ))}
-            {[...Array(4)].map(
-              (_, index) =>
-                links.length < index + 2 && (
-                  <li
-                    key={index}
-                    className="bg-[#d9d9d9] opacity-50 h-8 rounded-md"
-                  ></li>
-                )
-            )}
           </motion.ul>
           {Object.keys(image).length !== 0 ? (
             <div className="absolute h-20 w-20 overflow-hidden top-16 rounded-full left-[50%] -translate-x-[50%]">
@@ -104,4 +90,4 @@ const Phone = () => {
   );
 };
 
-export default Phone;
+export default Details;
