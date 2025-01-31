@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.route";
 import { userSchemas } from "./schemas/user.schema";
 import dbConnector from "./config/db";
 import linkRoutes from "./routes/link.route";
+import userRoutes from "./routes/user.route";
 
 dotenv.config();
 
@@ -89,6 +90,7 @@ async function start() {
   }
   server.register(authRoutes, { prefix: "/api/auth" });
   server.register(linkRoutes, { prefix: "/api" });
+  server.register(userRoutes, { prefix: "/api" });
 
   try {
     await server.listen({ port: 8080, host: "0.0.0.0" });

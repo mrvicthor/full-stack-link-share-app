@@ -127,6 +127,8 @@ export const resetPassword = async (data: ResetPasswordInput) => {
 export const createProfile = async (data: ProfileInput) =>
   API.post("/auth/create-profile", data);
 
+export const getPreview = async (id: string) => API.get(`/users/${id}`);
+
 export const createLink = async (data: LinkInput[]) =>
   API.post("/create-link", data);
 
