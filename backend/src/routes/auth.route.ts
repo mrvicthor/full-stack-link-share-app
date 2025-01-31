@@ -4,6 +4,7 @@ import {
   handleForgotPassword,
   handleLogin,
   handleLogout,
+  handleProfileUpdate,
   handleResetPassword,
   handleUserProfile,
   handleVerify,
@@ -43,5 +44,10 @@ export default async function authRoutes(server: FastifyInstance) {
     "/verify-session",
     { preHandler: [server.authenticate] },
     handleUserProfile
+  );
+  server.post(
+    "/create-profile",
+    { preHandler: [server.authenticate] },
+    handleProfileUpdate
   );
 }

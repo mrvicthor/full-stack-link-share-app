@@ -85,3 +85,12 @@ const linkSchema = z.object({
 
 export type CreateLinkInput = z.infer<typeof linkSchema>;
 export type LinkProps = z.infer<typeof linkSchema>;
+
+const profileUpdateSchema = z.object({
+  "First Name": z.string().min(3),
+  "Last Name": z.string().min(3),
+  Email: z.string().email(),
+  imageUrl: z.string(),
+});
+
+export type UpdateProfileInput = z.infer<typeof profileUpdateSchema>;

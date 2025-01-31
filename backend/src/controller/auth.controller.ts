@@ -4,6 +4,7 @@ import {
   ForgotPasswordInput,
   LoginInput,
   ResetPasswordInput,
+  UpdateProfileInput,
 } from "../schemas/user.schema";
 import UserModel from "../models/user.model";
 import {
@@ -18,6 +19,7 @@ import SessionModel from "../models/session.model";
 import { server } from "..";
 import { getPasswordResetTemplate } from "../utils/emailTemplate";
 import { sendMail } from "../utils/sendMail";
+import cloudinary from "../config/cloudinary";
 
 interface JWTPayload {
   id: string;
@@ -254,7 +256,6 @@ export const handleRefreshToken = async (
     const payload = {
       id: user._id,
       email: user.email,
-      firstName: user.firstName,
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + 60 * 60,
     };
@@ -285,11 +286,57 @@ export const handleRefreshToken = async (
         user: {
           id: user._id,
           email: user.email,
-          firstName: user.firstName,
         },
       });
   } catch (error) {
     request.log.error(error);
     return reply.code(401).send({ message: "Invalid refresh token" });
   }
+};
+
+export const handleProfileUpdate = async (
+  request: FastifyRequest<{ Body: UpdateProfileInput }>,
+  reply: FastifyReply
+) => {
+  const {
+    "First Name": firstName,
+    "Last Name": lastName,
+    Email: email,
+    imageUrl,
+  } = request.body;
+
+  const userId = request.user.id;
+  const existingUser = await UserModel.findById(userId);
+  if (!existingUser) {
+    return reply.code(403).send({ message: "User does not exist" });
+  }
+  let image = null;
+  const imageStringCheck = "https://res.cloudinary.com/mrvicthor/image/upload/";
+
+  if (imageUrl && imageUrl.includes(imageStringCheck) === false) {
+    const base64Data = imageUrl.split(",")[1];
+    const result = await cloudinary.uploader.upload(
+      `data:image/png;base64,${base64Data}`,
+      {
+        folder: "link-sharing",
+      }
+    );
+
+    image = result.secure_url;
+  } else {
+    image = imageUrl;
+  }
+
+  await UserModel.findByIdAndUpdate(
+    userId,
+    {
+      firstName,
+      lastName,
+      email,
+      image,
+    },
+    { new: true }
+  );
+
+  return reply.code(200).send({ message: "Profile successfully updated" });
 };
