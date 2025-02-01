@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import LinkModel from "../models/link.model";
 import UserModel from "../models/user.model";
 import { LinkProps } from "../schemas/user.schema";
@@ -7,12 +6,6 @@ type Link = {
   links: LinkProps[];
   owner: string;
 };
-
-// links: {
-//   platform: string;
-//   url: string;
-// }
-// [];
 
 export const createLink = async ({ links, owner }: Link) => {
   const user = await UserModel.findById(owner);

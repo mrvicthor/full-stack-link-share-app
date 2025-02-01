@@ -83,6 +83,7 @@ server.decorate(
 server.get("/healthcheck", async function () {
   return { status: "OK" };
 });
+
 async function start() {
   server.register(dbConnector);
   for (const schema of userSchemas) {
@@ -94,7 +95,9 @@ async function start() {
 
   try {
     await server.listen({ port: 8080, host: "0.0.0.0" });
-    server.log.info(`Server running at http://localhost:8080`);
+    server.log.info(
+      `Server running at http://localhost:8080 ${process.env.NODE_ENV}`
+    );
   } catch (error) {
     server.log.error(error);
     process.exit(1);

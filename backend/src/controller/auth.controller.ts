@@ -26,7 +26,7 @@ interface JWTPayload {
   [key: string]: any;
 }
 
-const DEVELOPMENT_ORIGIN = process.env.DEVELOPMENT_ORIGIN as string;
+const DEVELOPMENT_ORIGIN = process.env.NODE_ENV as string;
 const secure = process.env.NODE_ENV !== "development";
 export const handleCreateUser = async (
   request: FastifyRequest<{ Body: CreateUserInput }>,
