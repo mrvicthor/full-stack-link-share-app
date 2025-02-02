@@ -24,6 +24,11 @@ const Signup = () => {
   const navigate = useNavigate();
   const form = useForm<RegisterFormInput>({
     resolver: zodResolver(registerSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
   const {
     mutate: createAccount,

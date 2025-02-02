@@ -5,7 +5,9 @@
   "author": "victor eleanya",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development tsnd --respawn --transpile-only --exit-child src/index.ts"
+    "dev": "NODE_ENV=development tsnd --respawn --transpile-only --exit-child src/index.ts",
+    "build": "tsc && cp ./package.json ./dist",
+    "start": "node ./dist/index.js"
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",

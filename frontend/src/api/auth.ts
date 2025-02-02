@@ -68,6 +68,7 @@ API.interceptors.response.use(
       return Promise.reject(error);
     }
     if (isRefreshing) {
+      console.log(1, isRefreshing);
       return new Promise((resolve, reject) => {
         failedQueue.push({ resolve, reject });
       })
@@ -80,6 +81,7 @@ API.interceptors.response.use(
     originalRequest._retry = true;
     isRefreshing = true;
     try {
+      console.log(2, isRefreshing);
       const response = await API.post<AuthResponse>("/auth/refresh");
       const { accessToken } = response.data;
       localStorage.setItem("accessToken", accessToken);
@@ -92,6 +94,7 @@ API.interceptors.response.use(
       window.location.href = "/login";
       return Promise.reject(error);
     } finally {
+      console.log(3, isRefreshing);
       isRefreshing = false;
     }
   }

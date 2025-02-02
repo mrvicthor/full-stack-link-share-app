@@ -24,6 +24,10 @@ const LoginForm = () => {
   const redirectUrl = location.state?.redirectUrl || "/";
   const form = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   const onSubmit = (data: LoginInput) => loginUser(data);
