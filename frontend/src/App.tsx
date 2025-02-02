@@ -1,5 +1,5 @@
 import { Routes, Route, Outlet } from "react-router-dom";
-import LoginForm from "./pages/Login";
+import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import WelcomeScreen from "./pages/WelcomeScreen";
@@ -13,7 +13,7 @@ import Preview from "./pages/Preview";
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginForm />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
       <Route path="/password/forgot" element={<ForgotPassword />} />

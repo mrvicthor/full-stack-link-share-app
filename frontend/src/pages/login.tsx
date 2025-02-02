@@ -17,7 +17,7 @@ import PasswordIcon from "@/assets/images/icon-password.svg";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/api/auth";
-const LoginForm = () => {
+const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -163,4 +163,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;
