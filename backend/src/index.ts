@@ -30,7 +30,7 @@ declare module "@fastify/jwt" {
     };
   }
 }
-console.log(process.env.APP_ORIGIN, "vic");
+
 server.register(fastifyCors, {
   origin: process.env.APP_ORIGIN as string, // Your frontend origin
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
