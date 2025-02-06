@@ -31,7 +31,7 @@ declare module "@fastify/jwt" {
   }
 }
 server.register(fastifyCors, {
-  origin: [process.env.DEVELOPMENT_ORIGIN as string], // Your frontend origin
+  origin: [process.env.APP_ORIGIN as string], // Your frontend origin
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true, // If you're using cookies/credentials
   allowedHeaders: ["Content-Type", "Authorization"],
