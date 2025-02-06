@@ -1,6 +1,6 @@
 import { Routes, Route, Outlet } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
+import Login from "./pages/Login.tsx";
+import Home from "./pages/Home.tsx";
 import Layout from "./components/Layout";
 import WelcomeScreen from "./pages/WelcomeScreen";
 import Profile from "./pages/Profile";
