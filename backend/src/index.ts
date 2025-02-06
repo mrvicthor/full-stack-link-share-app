@@ -54,9 +54,8 @@ server.register(cookie, {
   secret: process.env.COOKIE_SECRET_KEY as string,
   parseOptions: {
     httpOnly: true,
-    secure: false, // true in production
+    secure: true, // true in production
     sameSite: "none",
-    path: "/",
   },
 } as FastifyCookieOptions);
 // can call the auth authenticator anything, e.g authenticate
