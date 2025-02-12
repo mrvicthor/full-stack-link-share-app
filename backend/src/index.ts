@@ -31,13 +31,7 @@ declare module "@fastify/jwt" {
   }
 }
 
-server.register(fastifyCors, {
-  // origin: "*", // Your frontend origin
-  // methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  // credentials: true, // If you're using cookies/credentials
-  // allowedHeaders: ["Content-Type", "Authorization"],
-  // exposedHeaders: ["set-cookie"],
-});
+server.register(fastifyCors);
 
 server.register(fjwt, {
   secret: process.env.JWT_SECRET_KEY as string,
