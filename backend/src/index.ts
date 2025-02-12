@@ -13,6 +13,8 @@ dotenv.config();
 
 export const server = fastify({ logger: true });
 
+server.register(fastifyCors);
+
 declare module "fastify" {
   export interface FastifyInstance {
     authenticate: any;
@@ -30,8 +32,6 @@ declare module "@fastify/jwt" {
     };
   }
 }
-
-server.register(fastifyCors);
 
 server.register(fjwt, {
   secret: process.env.JWT_SECRET_KEY as string,
@@ -83,6 +83,7 @@ async function start() {
   for (const schema of userSchemas) {
     server.addSchema(schema);
   }
+
   server.register(authRoutes, { prefix: "/api/auth" });
   server.register(linkRoutes, { prefix: "/api" });
   server.register(userRoutes, { prefix: "/api" });
